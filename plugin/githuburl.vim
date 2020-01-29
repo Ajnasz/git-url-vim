@@ -1,5 +1,5 @@
 function s:GithubUrl(...)
-  return call('githuburl#CreateUrl', a:000)
+  return call('githuburl#create_url', a:000)
 endfunction
 
 command! -range -bar GithubUrl call s:GithubUrl(<line1>, <line2>)

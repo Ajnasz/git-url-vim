@@ -8,12 +8,12 @@ function! githuburl#CreateUrl(...)
     let [l:start_line, l:end_line] = [line("'["), line("']")]
   endif
 
+  let filename = bufname('%')
   let l:origin_url = trim(system('git config --get remote.origin.url'))
-  let l:hash = trim(system('git rev-parse --verify HEAD'))
+  let l:hash = trim(system('git rev-list -1 HEAD ' . filename))
   let l:nested_directories = trim(system('export PROJECT_GIT_DIR=$(git rev-parse --show-toplevel);pwd|sed "s|$PROJECT_GIT_DIR||"|tr -d "[:space:]"'))
 
   let l:repo_name = substitute(substitute(substitute(l:origin_url, '^\(git\|git+ssh\)@\(.\+\)', '\2', 'i'), '\.git$', '', ''), ':', '/', '')
-  let filename = bufname('%')
 
   let l:line_expr = '#L' . l:start_line
 

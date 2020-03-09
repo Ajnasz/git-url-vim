@@ -26,7 +26,7 @@ function! githuburl#create_url(...)
   let filename = shellescape(bufname('%'))
 
   let l:origin_url = trim(system('git config --get remote.origin.url'))
-  let l:hash = trim(system(printf('git rev-list -1 HEAD %s', filename)))
+  let l:hash = trim(system(printf('git rev-list --abbrev-commit -1 HEAD %s', filename)))
   let l:file_path = trim(system(printf('git ls-files --full-name %s', filename)))
 
   let l:repo_name = s:get_repo_name(l:origin_url)
